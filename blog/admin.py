@@ -5,6 +5,7 @@ from .models import User, Post, Commentary
 
 admin.site.unregister(Group)
 
+
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = (
@@ -15,7 +16,6 @@ class UserAdmin(admin.ModelAdmin):
         "is_staff",
     )
     serch_fields = ("username", "email", "first_name", "last_name")
-
 
 
 @admin.register(Post)
@@ -30,4 +30,3 @@ class CommentaryAdmin(admin.ModelAdmin):
     list_display = ("user", "post", "created_time", "content")
     search_fields = ("content", "user__username")
     list_filter = ("created_time",)
-

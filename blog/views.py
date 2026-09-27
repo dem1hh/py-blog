@@ -46,4 +46,3 @@ class PostDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
         commentary.user = self.request.user
         commentary.save()
         return super().form_valid(form)
-
