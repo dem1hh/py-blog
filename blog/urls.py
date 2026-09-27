@@ -4,7 +4,7 @@ from django.urls import path, include
 import blog
 from blog.views import index, PostDetailView
 
-app_name = 'blog'
+app_name = "blog"
 
 urlpatterns = [
     path("", index, name="index"),
