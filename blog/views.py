@@ -1,28 +1,25 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormMixin
+
 from .forms import CommentaryForm
-from .models import User, Post, Commentary
+from .models import Post
 
 
-@login_required
-def index(request):
-    """View function for the home page of the site."""
-    posts = Post.objects.all().order_by("-created_time")
+class PostListView(LoginRequiredMixin, generic.ListView):
+    model = Post
+    template_name = "blog/index.html"
+    context_object_name = "post_list"
+    paginate_by = 5
+    queryset = Post.objects.all().order_by("-created_time")
 
-    num_visits = request.session.get("num_visits", 0)
-    request.session["num_visits"] = num_visits + 1
-
-    context = {
-        "posts": posts,
-        "post_list": posts,
-        "num_visits": num_visits + 1,
-    }
-
-    return render(request, "blog/index.html", context=context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        num_visits = self.request.session.get("num_visits", 0)
+        self.request.session["num_visits"] = num_visits + 1
+        context["num_visits"] = num_visits + 1
+        return context
 
 
 class PostDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
