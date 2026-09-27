@@ -18,6 +18,7 @@ def index(request):
 
     context = {
         "posts": posts,
+        "post_list": posts,
         "num_visits": num_visits + 1,
     }
 
