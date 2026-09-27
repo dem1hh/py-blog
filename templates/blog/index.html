@@ -7,9 +7,9 @@
 {% block content %}
   <h1>Lists Post</h1>
 
-  {% if posts %}
+  {% if post_list %}
     <ul>
-      {% for post in posts %}
+      {% for post in post_list %}
         <li>
           <h2>
             <a href="{% url 'blog:post-detail' post.pk %}">{{ post.title }}</a>
@@ -26,7 +26,7 @@
         <hr>
       {% endfor %}
     </ul>
-    {% include "includes/pagination.html" with page_obj=posts %}
+    {% include "includes/pagination.html" with page_obj=post_list %}
   {% else %}
     <p>No posts yet.</p>
   {% endif %}

@@ -25,9 +25,6 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.username} ({self.first_name} {self.last_name})"
 
-    def get_absolute_url(self):
-        return reverse("blog:user-detail", kwargs={"pk": self.pk})
-
 
 class Commentary(models.Model):
     user = models.ForeignKey(

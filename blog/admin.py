@@ -15,7 +15,7 @@ class UserAdmin(admin.ModelAdmin):
         "last_name",
         "is_staff",
     )
-    serch_fields = ("username", "email", "first_name", "last_name")
+    search_fields = ("username", "email", "first_name", "last_name")
 
 
 @admin.register(Post)
