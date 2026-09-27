@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views import generic
 from django.views.generic.edit import FormMixin
@@ -7,7 +6,7 @@ from .forms import CommentaryForm
 from .models import Post
 
 
-class PostListView(LoginRequiredMixin, generic.ListView):
+class PostListView(generic.ListView):
     model = Post
     template_name = "blog/index.html"
     context_object_name = "post_list"
@@ -22,7 +21,7 @@ class PostListView(LoginRequiredMixin, generic.ListView):
         return context
 
 
-class PostDetailView(LoginRequiredMixin, FormMixin, generic.DetailView):
+class PostDetailView(FormMixin, generic.DetailView):
     model = Post
     template_name = "blog/post_detail.html"
     context_object_name = "post"
